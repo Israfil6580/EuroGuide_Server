@@ -17,7 +17,7 @@ const client = new MongoClient(uri, {
 // middleware
 // Middleware Connections
 const corsConfig = {
-  origin: "https://magnificent-bavarois-f6e8db.netlify.app",
+  origin: "https://magnificent-bavarois-f6e8db.netlify.app", //important
   credentials: true,
 };
 app.use(cors(corsConfig));
