@@ -17,7 +17,7 @@ const client = new MongoClient(uri, {
 // middleware
 // Middleware Connections
 const corsConfig = {
-  origin: ["https://magnificent-bavarois-f6e8db.netlify.app/"],
+  origin: "https://magnificent-bavarois-f6e8db.netlify.app",
   credentials: true,
 };
 app.use(cors(corsConfig));
@@ -80,6 +80,29 @@ async function run() {
       } catch (error) {
         console.error("Error adding spot:", error);
       }
+    });
+    app.put("/added_spot/:id", async (req, res) => {
+      const db = client.db("euroguide");
+      const collection = db.collection("tourist_spots");
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateSpot = req.body;
+      const updatedSpot = {
+        $set: {
+          image: updateSpot.image,
+          tourists_spot_name: updateSpot.tourists_spot_name,
+          country_Name: updateSpot.country_Name,
+          location: updateSpot.location,
+          description: updateSpot.description,
+          average_cost: updateSpot.average_cost,
+          seasonality: updateSpot.seasonality,
+          travel_time: updateSpot.travel_time,
+          totalVisitorsPerYear: updateSpot.totalVisitorsPerYear,
+        },
+      };
+      const result = await collection.updateOne(filter, updatedSpot, options);
+      res.send(result);
     });
 
     app.delete("/added_spot/:id", async (req, res) => {
