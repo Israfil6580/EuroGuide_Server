@@ -11,7 +11,7 @@ This is the backend server for EuroGuide, a web application for exploring Europe
 - **Update Tourist Spot**: Update an existing tourist spot with new information.
 - **Delete Tourist Spot**: Delete a tourist spot from the database.
 - **Get Tourist Spot by ID**: Retrieve a specific tourist spot by its ID.
-- 
+
 ## Technologies Used
 
 - Node.js
